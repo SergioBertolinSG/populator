@@ -102,3 +102,6 @@ populator_env/
 .mypy_cache/
 
 description.json
+
+# macos
+.DS_Store

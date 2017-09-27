@@ -9,6 +9,7 @@ from termcolor import colored
 import sys
 import unittest
 
+
 class Populator:
 
     def __init__(self, filename):
@@ -48,6 +49,7 @@ class Populator:
             self.oc.logout()
         except:
             print (colored("Connection failed", 'red'))
+            exit(1)
 
     def create_users(self):
         try:
