@@ -8,6 +8,7 @@ import logging
 from termcolor import colored
 import sys
 import unittest
+import time
 
 
 class Populator:
@@ -50,6 +51,15 @@ class Populator:
         except:
             print (colored("Connection failed", 'red'))
             exit(1)
+
+    def wait_until_server_is_up(self):
+	timeout=300
+	response_code=0
+	time_elapsed=0
+	while( (response_code != 200) and (time_elapsed < timeout)):
+	    response_code=urllib.urlopen("http://localhost/status.php").getcode()
+	    time_elapsed = time_elapsed + 4
+	    time.sleep(4)
 
     def create_users(self):
         try:
