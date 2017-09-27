@@ -9,6 +9,8 @@ from termcolor import colored
 import sys
 import unittest
 import time
+import urllib
+import urllib.request
 
 
 class Populator:
@@ -20,7 +22,6 @@ class Populator:
         self.parse_description_file(filename)
         self.oc = owncloud.Client(self.oc_host)
         self.oc._dav_endpoint_version = 1
-
         self.tc = unittest.TestCase('__init__')
         
 
@@ -33,13 +34,6 @@ class Populator:
             self.users = data["users"]
             self.groups = data["groups"]
             self.shares = data["shares"]
-            
-
-        # self.users = {}
-        # self.groups = []
-        # self.users_groups = {}
-        # self.oc_user = oc_user
-        # self.oc_password = oc_password
 
     def check_connection(self):
         try:
@@ -53,13 +47,15 @@ class Populator:
             exit(1)
 
     def wait_until_server_is_up(self):
-	timeout=300
-	response_code=0
-	time_elapsed=0
-	while( (response_code != 200) and (time_elapsed < timeout)):
-	    response_code=urllib.urlopen("http://localhost/status.php").getcode()
-	    time_elapsed = time_elapsed + 4
-	    time.sleep(4)
+       timeout=300
+       response_code=0
+       time_elapsed=0
+       while( (response_code != 200) and (time_elapsed < timeout)):
+            response_code=urllib.request.urlopen("http://localhost/status.php").getcode()
+            if (response_code == 200):
+                break
+            time_elapsed = time_elapsed + 4
+            time.sleep(4)
 
     def create_users(self):
         try:
@@ -198,18 +194,3 @@ if __name__ == '__main__':
     p.check_groups()
     p.check_shares()
     p.check_files()
-
-
-'''
-oc = owncloud.Client('http://docker.oc.solidgear.es:10576/')
-
-oc.login('admin', 'Password')
-
-oc.mkdir('testdir')
-
-oc.put_file('testdir/remotefile.txt', 'localfile.txt')
-
-link_info = oc.share_file_with_link('testdir/remotefile.txt')
-
-print("Here is your link: " + link_info.get_link())
-'''
