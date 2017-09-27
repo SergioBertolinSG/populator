@@ -51,7 +51,7 @@ class Populator:
        response_code=0
        time_elapsed=0
        while( (response_code != 200) and (time_elapsed < timeout)):
-            response_code=urllib.request.urlopen(self.oc.host +  "/status.php").getcode()
+            response_code=urllib.request.urlopen(self.oc_host +  "/status.php").getcode()
             if (response_code == 200):
                 break
             time_elapsed = time_elapsed + 4
