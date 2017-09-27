@@ -1,0 +1,50 @@
+{
+    "host": "http://localhost/owncloud",
+    "auth": {
+        "user": "admin",
+        "password": "admin"
+    },
+    "users": [
+        {
+            "username": "user1",
+            "password": "user1",
+            "folders": [
+                "test",
+                "test/subfolder1",
+                "test/subfolder2",
+                "test/subfolder3",
+                "test/subfolder4",
+                "test/subfolder4/subsubfolder",
+                "things",
+                "things_to_share"
+            ],
+            "files": [
+                {
+                    "localpath": "files_to_upload/localfile.txt",
+                    "destinationpath": "things/testfile1.txt"
+                },
+                {
+                    "localpath": "files_to_upload/testfile2.txt",
+                    "destinationpath": "things/testfile2.txt"
+                }
+            ],
+            "shares": [
+                {
+                    "sharee": "user2",
+                    "path": "things/testfile1.txt"
+                }
+            ]
+        },
+        {
+            "username": "user2",
+            "password": "user2",
+            "folders": [
+            ],
+            "files": {
+
+            },
+            "shares": []
+        }
+    ],
+    "groups": ["group1", "group2", "group3"]
+}
