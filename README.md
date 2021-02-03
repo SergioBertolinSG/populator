@@ -1,5 +1,5 @@
 # populator
-A tool for populate a server and checking that everything was created
+A tool to populate a server and check that everything was created
 
 Fill the description.json file using description.example.json as template and pass it as a parameter to populator.py.
 
